@@ -5,7 +5,8 @@ public class ClawGripController : MonoBehaviour
     [Header("Claw Grip Settings")]
     public float gripStrength = 10.0f;
     public float gripSpeed = 5.0f;
-
+    public float openAngle = 45.0f;
+    public float closedAngle = 0.0f;
 
     [Header("Claw Components")]
     public GameObject leftClaw;
@@ -13,14 +14,51 @@ public class ClawGripController : MonoBehaviour
     public GameObject topClaw;
     public GameObject bottomClaw;
 
+    private float currentAngle;
+    private float targetAngle;
+    private bool isClosed = false;
 
-
-
-
-    public void ToggleGrip() 
-    { /* open/close claw */ 
-
-    
+    void Start()
+    {
+        currentAngle = openAngle;
+        targetAngle = openAngle;
+        UpdateClawRotation();
     }
 
+    void Update()
+    {
+        if (Mathf.Abs(currentAngle - targetAngle) > 0.1f)
+        {
+            currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, gripSpeed * Time.deltaTime * 50f);
+            UpdateClawRotation();
+        }
+    }
+
+    public void OpenGrip()
+    {
+        targetAngle = openAngle;
+        isClosed = false;
+    }
+
+    public void CloseGrip()
+    {
+        targetAngle = closedAngle;
+        isClosed = true;
+    }
+
+    public void ToggleGrip()
+    {
+        if (isClosed)
+            OpenGrip();
+        else
+            CloseGrip();
+    }
+
+    private void UpdateClawRotation()
+    {
+        if (leftClaw) leftClaw.transform.localRotation = Quaternion.Euler(0, 0, -currentAngle);
+        if (rightClaw) rightClaw.transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
+        if (topClaw) topClaw.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
+        if (bottomClaw) bottomClaw.transform.localRotation = Quaternion.Euler(-currentAngle, 0, 0);
+    }
 }

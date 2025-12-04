@@ -9,6 +9,9 @@ public class ClawMovementController : MonoBehaviour
     public float dropSpeed = 3.0f;
     public float liftSpeed = 2.0f;
 
+    [Header("Input")]
+    public GameInputController inputController;
+
     [Header("Movement Boundaries")]
     public float minX = -5f;
     public float maxX = 5f;
@@ -49,7 +52,7 @@ public class ClawMovementController : MonoBehaviour
             HandleMovement();
 
             // Drop claw when space is pressed
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (inputController != null && inputController.DropInput)
             {
                 StartCoroutine(DropSequence());
             }
@@ -59,11 +62,11 @@ public class ClawMovementController : MonoBehaviour
     void HandleMovement()
     {
         // Horizontal movement (X-axis)
-        float horizontal = Input.GetAxis("Horizontal");
+        float horizontal = inputController.MovementInput.x;
         MoveHorizontal(horizontal);
 
         // Forward/backward movement (Z-axis)
-        float vertical = Input.GetAxis("Vertical");
+        float vertical = inputController.MovementInput.y;
         MoveVertical(vertical);
     }
 
