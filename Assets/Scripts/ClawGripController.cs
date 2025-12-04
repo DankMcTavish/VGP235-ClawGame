@@ -19,6 +19,7 @@ public class ClawGripController : MonoBehaviour
 
     public void ToggleGrip() 
     { /* open/close claw */ 
+
     
     }
 

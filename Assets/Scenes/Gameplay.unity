@@ -872,6 +872,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a29b4ba9045d2d4aae2e66ec08e2955, type: 3}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: clawObject
+      value: 
+      objectReference: {fileID: 2533610257509076080}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: pauseMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a29b4ba9045d2d4aae2e66ec08e2955, type: 3}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: victoryMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 15ae68bb4ca0c6c41a4ae4b69835ab39, type: 3}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: gameOverMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: b30c5dd679bfc3c40ba0ac0b52e12edf, type: 3}
+    - target: {fileID: 9171163284869373745, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 2ba865e03b336f4488149117179f91d1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
