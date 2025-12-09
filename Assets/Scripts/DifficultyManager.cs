@@ -1,6 +1,6 @@
 using UnityEngine;
 
-enum DifficultyLevel
+public enum DifficultyLevel
 {
     Easy,
     Medium,
@@ -18,15 +18,18 @@ public class DifficultyManager : MonoBehaviour
 
 
 
+    public DifficultyLevel currentDifficulty;
+
     private void Start()
     {
         SetDifficulty(DifficultyLevel.Medium);
     }
 
 
-    void SetDifficulty(DifficultyLevel level)
+    public void SetDifficulty(DifficultyLevel level)
     {
-        switch (DifficultyLevel.Medium)
+        currentDifficulty = level;
+        switch (level)
         {
             case DifficultyLevel.Easy:
                 prizeToWin = 3;
@@ -45,5 +48,18 @@ public class DifficultyManager : MonoBehaviour
                 FindFirstObjectByType<GameManager>().timeLimit = 60f;
                 break;
         }
+    }
+
+    public void NextDifficulty()
+    {
+        int currentLevelIndex = (int)currentDifficulty;
+        int nextLevelIndex = currentLevelIndex + 1;
+        
+        if (nextLevelIndex > (int)DifficultyLevel.Expert)
+        {
+            nextLevelIndex = (int)DifficultyLevel.Expert; // Cap at Expert or loop? Plan said "increase", let's cap.
+        }
+
+        SetDifficulty((DifficultyLevel)nextLevelIndex);
     }
 }
