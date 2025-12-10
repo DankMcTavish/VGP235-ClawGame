@@ -4082,9 +4082,17 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5585960404871861910, guid: 6dc2f4cf11ea2d2449d52468fccfb0a9, type: 3}
+      propertyPath: grabRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585960404871861910, guid: 6dc2f4cf11ea2d2449d52468fccfb0a9, type: 3}
       propertyPath: inputController
       value: 
       objectReference: {fileID: 2533610257509076087}
+    - target: {fileID: 5585960404871861910, guid: 6dc2f4cf11ea2d2449d52468fccfb0a9, type: 3}
+      propertyPath: gripStrengthFactor
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6137887396900435966, guid: 6dc2f4cf11ea2d2449d52468fccfb0a9, type: 3}
       propertyPath: m_Layer
       value: 6
