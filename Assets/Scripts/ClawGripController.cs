@@ -11,8 +11,7 @@ public class ClawGripController : MonoBehaviour
     [Header("Claw Components")]
     public GameObject leftClaw;
     public GameObject rightClaw;
-    public GameObject topClaw;
-    public GameObject bottomClaw;
+    public GameObject centerClaw;
 
     [Header("Object Reference")]
     public GameObject grabbedObject;
@@ -69,9 +68,11 @@ public class ClawGripController : MonoBehaviour
 
     private void UpdateClawRotation()
     {
+        // Left (-Z) and Right (+Z) are standard side claws
         if (leftClaw) leftClaw.transform.localRotation = Quaternion.Euler(0, 0, -currentAngle);
         if (rightClaw) rightClaw.transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
-        if (topClaw) topClaw.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
-        if (bottomClaw) bottomClaw.transform.localRotation = Quaternion.Euler(-currentAngle, 0, 0);
+        
+        // Center claw (at the back/front) likely rotates on X
+        if (centerClaw) centerClaw.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
     }
 }
