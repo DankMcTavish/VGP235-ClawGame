@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &670445234563986758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6016162561401370112}
+  m_Layer: 0
+  m_Name: GrabLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6016162561401370112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670445234563986758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.062, y: -0.844, z: -0.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3193831878546765361}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191097590018621157
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +40,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7145355718445183253}
+  - component: {fileID: 5585960404871861910}
+  - component: {fileID: 1751447119010206710}
   m_Layer: 0
   m_Name: ClawPrefab
   m_TagString: Untagged
@@ -33,6 +66,59 @@ Transform:
   - {fileID: 3193831878546765361}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5585960404871861910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191097590018621157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7363d08313e69eb42a6327c1f902bb7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotateSpeed: 100
+  dropSpeed: 3
+  liftSpeed: 2
+  inputController: {fileID: 0}
+  minX: -5
+  maxX: 5
+  minZ: -5
+  maxZ: 5
+  clawBase: {fileID: 4266456641647941002}
+  leftClawArm: {fileID: 1717410868162563437}
+  rightClawArm: {fileID: 4926837804618916490}
+  centerClawArm: {fileID: 6137887396900435966}
+  clawGrabPoint: {fileID: 6016162561401370112}
+  dropHeight: 5
+  minHeight: 0.5
+  grabDelay: 0.5
+  grabRadius: 1
+  grabbableLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &1751447119010206710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191097590018621157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a5dd53f6b3df341aa064d3b7bbb040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripStrength: 10
+  gripSpeed: 5
+  openAngle: 45
+  closedAngle: 0
+  leftClaw: {fileID: 1717410868162563437}
+  rightClaw: {fileID: 4926837804618916490}
+  topClaw: {fileID: 6137887396900435966}
+  bottomClaw: {fileID: 0}
 --- !u!1 &1717410868162563437
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,5 +734,6 @@ Transform:
   - {fileID: 8369314645792833400}
   - {fileID: 87759189916543170}
   - {fileID: 7010289189337308062}
+  - {fileID: 6016162561401370112}
   m_Father: {fileID: 7145355718445183253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
