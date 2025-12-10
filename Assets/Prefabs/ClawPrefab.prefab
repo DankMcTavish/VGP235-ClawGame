@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6016162561401370112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrabLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 5585960404871861910}
   - component: {fileID: 1751447119010206710}
   - component: {fileID: 8081741470098261111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawPrefab
-  m_TagString: Untagged
+  m_TagString: Claw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11db2e6e6153854c993f02b06506cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveActionReference: {fileID: 2123461544449090272, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
+  dropActionReference: {fileID: -3637710087533031964, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
   useKeyboardInput: 1
   useTouchInput: 0
 --- !u!1 &1717410868162563437
@@ -146,7 +148,7 @@ GameObject:
   - component: {fileID: 1182679370304392474}
   - component: {fileID: 4170780425847340853}
   - component: {fileID: 5420240700880126355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +258,7 @@ GameObject:
   - component: {fileID: 1625207602505193130}
   - component: {fileID: 6705472868402246844}
   - component: {fileID: 971457871831182218}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +368,7 @@ GameObject:
   - component: {fileID: 3938100180093841688}
   - component: {fileID: 1079954983924506871}
   - component: {fileID: 510461495694694925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +478,7 @@ GameObject:
   - component: {fileID: 5959799750112365669}
   - component: {fileID: 553265269413050150}
   - component: {fileID: 3500079205130092269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8813135088588499287}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Claw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +621,7 @@ GameObject:
   - component: {fileID: 287335137720918351}
   - component: {fileID: 2473675529428486134}
   - component: {fileID: 5782263495262430418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3193831878546765361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Claws
   m_TagString: Untagged
   m_Icon: {fileID: 0}

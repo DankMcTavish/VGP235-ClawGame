@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3713183011302359329}
   - component: {fileID: 4896253836080291448}
   - component: {fileID: 2971477831651441431}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Prize02
-  m_TagString: Untagged
+  m_TagString: Prize
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,6 +12,9 @@ public class ClawMovementController : MonoBehaviour
     [Header("Input")]
     public GameInputController inputController;
 
+    [Header("Input Settings")]
+    public ClawGripController gripController;
+
     [Header("Movement Boundaries")]
     public float minX = -5f;
     public float maxX = 5f;
@@ -100,6 +103,8 @@ public class ClawMovementController : MonoBehaviour
         Vector3 currentPos = transform.position;
         Vector3 dropTarget = new Vector3(currentPos.x, minHeight, currentPos.z);
 
+        gripController.GripObject();
+
         // Drop down
         while (Vector3.Distance(transform.position, dropTarget) > 0.1f)
         {
@@ -136,7 +141,8 @@ public class ClawMovementController : MonoBehaviour
         // Release object at collection point
         if (grabbedObject != null)
         {
-            ReleaseObject();
+            gripController.ReleaseObject(); // Release object from claw
+            ReleaseObject(); // Release object from claw
         }
 
         isReturning = false;
