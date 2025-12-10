@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
-using GameInput;
-
+using UnityEngine.SceneManagement;
 
 public class GameInputController : MonoBehaviour
 {
+    [Header("Input Action References")]
+    [SerializeField] private InputActionReference moveActionReference;
+    [SerializeField] private InputActionReference dropActionReference;
 
     [Header("Settings")]
     public bool useKeyboardInput = true;   // Toggle for testing in editor
@@ -15,8 +15,17 @@ public class GameInputController : MonoBehaviour
     public Vector2 MovementInput { get; private set; }
     public bool DropInput { get; private set; }
 
-    private InputActionReference InputActionReference;
-    private InputActionReference DropInputActionReference;
+    private void OnEnable()
+    {
+        if (moveActionReference != null) moveActionReference.action.Enable();
+        if (dropActionReference != null) dropActionReference.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        if (moveActionReference != null) moveActionReference.action.Disable();
+        if (dropActionReference != null) dropActionReference.action.Disable();
+    }
 
     void Update()
     {
@@ -25,8 +34,7 @@ public class GameInputController : MonoBehaviour
 
         if (useKeyboardInput)
         {
-            HandleKeyboardInput(InputActionReference);
-            HandleKeyboardInput(DropInputActionReference);
+            HandleKeyboardInput();
         }
 
         if (useTouchInput)
@@ -35,27 +43,14 @@ public class GameInputController : MonoBehaviour
         }
     }
 
-
-    private void OnEnable()
+    private void HandleKeyboardInput()
     {
-        InputActionReference.Enable();
-        DropInputActionReference.Enable();
-    }
+        if (moveActionReference != null)
+        {
+            MovementInput = moveActionReference.action.ReadValue<Vector2>();
+        }
 
-    private void OnDisable()
-    {
-        InputActionReference.Disable();
-        DropInputActionReference.Disable();
-    }
-
-    private void HandleKeyboardInput(InputAction inputAction)
-    {
-        InputActionReference inputActionReference = inputAction;
-        float horizontal = inputActionReference.ReadValue<Vector2>().x;
-        float vertical = inputActionReference.ReadValue<Vector2>().y;
-        MovementInput = new Vector2(horizontal, vertical);
-
-        if (InputActionReference.GetPressed(KeyCode.Space))
+        if (dropActionReference != null && dropActionReference.action.WasPressedThisFrame())
         {
             DropInput = true;
         }
