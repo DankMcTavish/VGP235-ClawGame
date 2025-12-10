@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 7145355718445183253}
   - component: {fileID: 5585960404871861910}
   - component: {fileID: 1751447119010206710}
+  - component: {fileID: 8081741470098261111}
   m_Layer: 0
   m_Name: ClawPrefab
   m_TagString: Untagged
@@ -82,7 +83,7 @@ MonoBehaviour:
   rotateSpeed: 100
   dropSpeed: 3
   liftSpeed: 2
-  inputController: {fileID: 0}
+  inputController: {fileID: 8081741470098261111}
   minX: -5
   maxX: 5
   minZ: -5
@@ -119,6 +120,20 @@ MonoBehaviour:
   rightClaw: {fileID: 4926837804618916490}
   topClaw: {fileID: 6137887396900435966}
   bottomClaw: {fileID: 0}
+--- !u!114 &8081741470098261111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191097590018621157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11db2e6e6153854c993f02b06506cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useKeyboardInput: 1
+  useTouchInput: 0
 --- !u!1 &1717410868162563437
 GameObject:
   m_ObjectHideFlags: 0
