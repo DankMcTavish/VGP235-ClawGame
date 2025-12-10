@@ -34,6 +34,7 @@ public class ClawMovementController : MonoBehaviour
     public float grabDelay = 0.5f;
 
     [Header("Grab Settings")]
+    [Range(0f, 1f)] public float gripStrengthFactor = 0.8f; // 1.0 = Strong, 0.0 = Weak
     public float grabRadius = 1f;
     public LayerMask grabbableLayer;
 
@@ -123,40 +124,67 @@ public class ClawMovementController : MonoBehaviour
         GrabNearbyObject();
 
         // Close Grip Visuals
-        if (grabbedObject != null)
-        {
-             gripController.GripObject();
-        }
-        else
-        {
-             // Close anyway for visual effect? Or stay open? Let's close it.
-             gripController.GripObject();
-        }
+        gripController.GripObject();
 
-        // Return to start
-        isDropping = false;
-        isReturning = true;
-
-        while (Vector3.Distance(transform.position, startPosition) > 0.1f)
+        // Lift straight UP first (maintain X/Z)
+        Vector3 liftTarget = new Vector3(transform.position.x, startPosition.y, transform.position.z);
+        
+        while (Vector3.Distance(transform.position, liftTarget) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(
                 transform.position,
-                startPosition,
+                liftTarget,
                 liftSpeed * Time.deltaTime
             );
             yield return null;
         }
 
-        transform.position = startPosition;
+        // Force position to exact lift height
+        transform.position = liftTarget;
 
-        // Release object at collection point
+        // Slippage Check
         if (grabbedObject != null)
         {
-            gripController.ReleaseObject(); // Release visual grip
-            ReleaseObject(); // Release physical object
+            // Simple random chance. 0 = always slip, 1 = never slip.
+            if (Random.value > gripStrengthFactor) 
+            {
+                 Debug.Log("Object Slipped!");
+                 gripController.ReleaseObject();
+                 ReleaseObject();
+            }
         }
 
-        isReturning = false;
+        // Deciding what to do next
+        if (grabbedObject != null)
+        {
+            // We have a prize! Return to start (Home)
+            isDropping = false;
+            isReturning = true;
+
+            while (Vector3.Distance(transform.position, startPosition) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    startPosition,
+                    liftSpeed * Time.deltaTime
+                );
+                yield return null;
+            }
+
+            transform.position = startPosition;
+
+            // Release object at collection point
+            gripController.ReleaseObject(); 
+            ReleaseObject(); 
+
+            isReturning = false;
+        }
+        else
+        {
+             // Missed or slipped. Stay here and let player try again.
+             isDropping = false;
+             isReturning = false;
+        }
     }
 
     void GrabNearbyObject()

@@ -84,6 +84,7 @@ MonoBehaviour:
   dropSpeed: 3
   liftSpeed: 2
   inputController: {fileID: 8081741470098261111}
+  gripController: {fileID: 1751447119010206710}
   minX: -5
   maxX: 5
   minZ: -5
@@ -96,7 +97,7 @@ MonoBehaviour:
   dropHeight: 5
   minHeight: 0.5
   grabDelay: 0.5
-  grabRadius: 1
+  grabRadius: 3
   grabbableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -120,6 +121,7 @@ MonoBehaviour:
   rightClaw: {fileID: 4926837804618916490}
   topClaw: {fileID: 6137887396900435966}
   bottomClaw: {fileID: 0}
+  grabbedObject: {fileID: 2680283754032970803, guid: 54efcd9ff1172b44fa9a4d11e8b2a46d, type: 3}
 --- !u!114 &8081741470098261111
 MonoBehaviour:
   m_ObjectHideFlags: 0
