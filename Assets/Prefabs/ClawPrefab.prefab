@@ -40,9 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7145355718445183253}
-  - component: {fileID: 5585960404871861910}
-  - component: {fileID: 1751447119010206710}
-  - component: {fileID: 8081741470098261111}
   m_Layer: 6
   m_Name: ClawPrefab
   m_TagString: Claw
@@ -63,81 +60,10 @@ Transform:
   m_LocalScale: {x: 1, y: 0.45014, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8624511483059542680}
+  - {fileID: 9213917060143587322}
+  - {fileID: 8813135088588499287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5585960404871861910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191097590018621157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7363d08313e69eb42a6327c1f902bb7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotateSpeed: 100
-  dropSpeed: 3
-  liftSpeed: 2
-  inputController: {fileID: 8081741470098261111}
-  gripController: {fileID: 1751447119010206710}
-  minX: -5
-  maxX: 5
-  minZ: -5
-  maxZ: 5
-  clawBase: {fileID: 4266456641647941002}
-  leftClawArm: {fileID: 1717410868162563437}
-  rightClawArm: {fileID: 4926837804618916490}
-  centerClawArm: {fileID: 6137887396900435966}
-  clawGrabPoint: {fileID: 6016162561401370112}
-  dropHeight: 5
-  minHeight: 0.5
-  grabDelay: 0.5
-  gripStrengthFactor: 0.8
-  grabRadius: 3
-  grabbableLayer:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &1751447119010206710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191097590018621157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a5dd53f6b3df341aa064d3b7bbb040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gripStrength: 10
-  gripSpeed: 5
-  openAngle: 45
-  closedAngle: 0
-  leftClaw: {fileID: 1717410868162563437}
-  rightClaw: {fileID: 4926837804618916490}
-  topClaw: {fileID: 6137887396900435966}
-  bottomClaw: {fileID: 0}
-  grabbedObject: {fileID: 2680283754032970803, guid: 54efcd9ff1172b44fa9a4d11e8b2a46d, type: 3}
---- !u!114 &8081741470098261111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191097590018621157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11db2e6e6153854c993f02b06506cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveActionReference: {fileID: 2123461544449090272, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
-  dropActionReference: {fileID: -3637710087533031964, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
-  useKeyboardInput: 1
-  useTouchInput: 0
 --- !u!1 &1717410868162563437
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +514,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8813135088588499287}
   - component: {fileID: 1713856394523484152}
+  - component: {fileID: 7267782371669628590}
+  - component: {fileID: 245246333624772526}
+  - component: {fileID: 2384602824216268057}
   m_Layer: 6
   m_Name: Claw
   m_TagString: Untagged
@@ -604,14 +533,14 @@ Transform:
   m_GameObject: {fileID: 5028576400415249312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.87, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2.2215312, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3193831878546765361}
   - {fileID: 4726175194364111388}
   - {fileID: 4643028160568693573}
-  m_Father: {fileID: 8624511483059542680}
+  m_Father: {fileID: 7145355718445183253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1713856394523484152
 Rigidbody:
@@ -640,6 +569,73 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7267782371669628590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028576400415249312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7363d08313e69eb42a6327c1f902bb7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  dropSpeed: 3
+  liftSpeed: 2
+  inputController: {fileID: 2384602824216268057}
+  gripController: {fileID: 245246333624772526}
+  minX: -5
+  maxX: 5
+  minZ: -5
+  maxZ: 5
+  clawGrabPoint: {fileID: 6016162561401370112}
+  cableRenderer: {fileID: 0}
+  maxDropDistance: 6
+  minHeight: 0.5
+  grabDelay: 0.5
+  gripStrengthFactor: 0.8
+  grabRadius: 3
+  grabbableLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &245246333624772526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028576400415249312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a5dd53f6b3df341aa064d3b7bbb040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripStrength: 10
+  gripSpeed: 5
+  openAngle: 45
+  closedAngle: 0
+  leftClaw: {fileID: 1717410868162563437}
+  rightClaw: {fileID: 4926837804618916490}
+  centerClaw: {fileID: 6137887396900435966}
+  grabbedObject: {fileID: 2680283754032970803, guid: 54efcd9ff1172b44fa9a4d11e8b2a46d, type: 3}
+--- !u!114 &2384602824216268057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028576400415249312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11db2e6e6153854c993f02b06506cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveActionReference: {fileID: 2123461544449090272, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
+  dropActionReference: {fileID: -3637710087533031964, guid: 3175dfb63aa39a14ca79efa75438d09c, type: 3}
+  useKeyboardInput: 1
+  useTouchInput: 0
 --- !u!1 &6137887396900435966
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +781,7 @@ Transform:
   - {fileID: 6016162561401370112}
   m_Father: {fileID: 8813135088588499287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8358404021245982228
+--- !u!1 &7124656023341574721
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -793,39 +789,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8624511483059542680}
-  - component: {fileID: 890987348875958151}
-  - component: {fileID: 5160750896876506438}
-  m_Layer: 6
-  m_Name: Gantry
+  - component: {fileID: 9213917060143587322}
+  - component: {fileID: 6953978805256921007}
+  m_Layer: 0
+  m_Name: ClawGantry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8624511483059542680
+--- !u!4 &9213917060143587322
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358404021245982228}
+  m_GameObject: {fileID: 7124656023341574721}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.87, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 3}
+  m_LocalScale: {x: 1, y: 2.2215312, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8813135088588499287}
+  m_Children: []
   m_Father: {fileID: 7145355718445183253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &890987348875958151
+--- !u!54 &6953978805256921007
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358404021245982228}
+  m_GameObject: {fileID: 7124656023341574721}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -842,31 +836,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!145 &5160750896876506438
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358404021245982228}
-  serializedVersion: 4
-  m_ConnectedBody: {fileID: 1713856394523484152}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
