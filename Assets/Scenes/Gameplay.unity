@@ -3992,6 +3992,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrizeSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 2845377657002176866, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845377657002176866, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845377657002176866, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3064950968211950892, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3064950968211950892, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3064950968211950892, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6144747292907323235, guid: 7f46b728b464cd0458aae4a1bf6a1158, type: 3}
       propertyPath: prizePrefabs.Array.size
       value: 2
