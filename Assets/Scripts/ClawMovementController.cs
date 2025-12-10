@@ -103,7 +103,7 @@ public class ClawMovementController : MonoBehaviour
         Vector3 currentPos = transform.position;
         Vector3 dropTarget = new Vector3(currentPos.x, minHeight, currentPos.z);
 
-        gripController.GripObject();
+        gripController.OpenGrip(); // Ensure open before dropping
 
         // Drop down
         while (Vector3.Distance(transform.position, dropTarget) > 0.1f)
@@ -121,6 +121,17 @@ public class ClawMovementController : MonoBehaviour
 
         // Try to grab something
         GrabNearbyObject();
+
+        // Close Grip Visuals
+        if (grabbedObject != null)
+        {
+             gripController.GripObject();
+        }
+        else
+        {
+             // Close anyway for visual effect? Or stay open? Let's close it.
+             gripController.GripObject();
+        }
 
         // Return to start
         isDropping = false;
@@ -141,8 +152,8 @@ public class ClawMovementController : MonoBehaviour
         // Release object at collection point
         if (grabbedObject != null)
         {
-            gripController.ReleaseObject(); // Release object from claw
-            ReleaseObject(); // Release object from claw
+            gripController.ReleaseObject(); // Release visual grip
+            ReleaseObject(); // Release physical object
         }
 
         isReturning = false;

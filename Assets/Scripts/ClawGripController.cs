@@ -14,6 +14,9 @@ public class ClawGripController : MonoBehaviour
     public GameObject topClaw;
     public GameObject bottomClaw;
 
+    [Header("Object Reference")]
+    public GameObject grabbedObject;
+
     private float currentAngle;
     private float targetAngle;
     private bool isClosed = false;
@@ -52,6 +55,16 @@ public class ClawGripController : MonoBehaviour
             OpenGrip();
         else
             CloseGrip();
+    }
+
+    public void GripObject()
+    {
+        CloseGrip();
+    }
+
+    public void ReleaseObject()
+    {
+        OpenGrip();
     }
 
     private void UpdateClawRotation()
