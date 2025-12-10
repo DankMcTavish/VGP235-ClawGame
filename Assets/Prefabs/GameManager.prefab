@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8cdf0d52147eb4bbbae5c2b034212f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  timeLimit: 120
+  uiController: {fileID: 4463352309294796886, guid: c50e608632281c64183496b7d599355a, type: 3}

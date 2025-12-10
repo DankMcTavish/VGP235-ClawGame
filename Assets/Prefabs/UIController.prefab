@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d52566a28e541448ae1e3ed8c3d421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  winningScreen: {fileID: 0}
+  gameManager: {fileID: 7334670561861520138, guid: c6909630e63834a4e88d1554e10c0e48, type: 3}
+  difficultyManager: {fileID: 8501755039075272440, guid: 7f6306457e1670445a15a8e8c4589420, type: 3}

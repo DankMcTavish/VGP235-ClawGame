@@ -8,6 +8,16 @@ public class UIController : MonoBehaviour
     public GameObject gameOverMenu;
     public GameObject winningScreen;
 
+
+    [Header("Buttons")]
+    public Button startButton;
+    public Button pauseButton;
+    public Button resumeButton;
+    public Button retryButton;
+    public Button continueButton;
+    public Button mainMenuButton;
+    public Button exitButton;
+
     [Header("Managers")]
     public GameManager gameManager;
     public DifficultyManager difficultyManager;
@@ -19,6 +29,13 @@ public class UIController : MonoBehaviour
         if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
         if (difficultyManager == null) difficultyManager = FindFirstObjectByType<DifficultyManager>();
 
+        startButton.onClick.AddListener(StartGame);
+        pauseButton.onClick.AddListener(PauseGame);
+        resumeButton.onClick.AddListener(ResumeGame);
+        retryButton.onClick.AddListener(RetryGame);
+        continueButton.onClick.AddListener(ContinueToNextLevel);
+        mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+        exitButton.onClick.AddListener(ExitGame);
         ShowMainMenu();
     }
 
