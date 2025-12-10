@@ -1,4 +1,7 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
 
 public class UIController : MonoBehaviour
 {
@@ -17,6 +20,11 @@ public class UIController : MonoBehaviour
     public Button continueButton;
     public Button mainMenuButton;
     public Button exitButton;
+
+    [Header("Text")]
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI levelText;
 
     [Header("Managers")]
     public GameManager gameManager;

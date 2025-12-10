@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using GameInput;
+
 
 public class GameInputController : MonoBehaviour
 {
@@ -11,6 +15,9 @@ public class GameInputController : MonoBehaviour
     public Vector2 MovementInput { get; private set; }
     public bool DropInput { get; private set; }
 
+    private InputActionReference InputActionReference;
+    private InputActionReference DropInputActionReference;
+
     void Update()
     {
         MovementInput = Vector2.zero;
@@ -18,7 +25,8 @@ public class GameInputController : MonoBehaviour
 
         if (useKeyboardInput)
         {
-            HandleKeyboardInput();
+            HandleKeyboardInput(InputActionReference);
+            HandleKeyboardInput(DropInputActionReference);
         }
 
         if (useTouchInput)
@@ -27,13 +35,27 @@ public class GameInputController : MonoBehaviour
         }
     }
 
-    private void HandleKeyboardInput()
+
+    private void OnEnable()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        InputActionReference.Enable();
+        DropInputActionReference.Enable();
+    }
+
+    private void OnDisable()
+    {
+        InputActionReference.Disable();
+        DropInputActionReference.Disable();
+    }
+
+    private void HandleKeyboardInput(InputAction inputAction)
+    {
+        InputActionReference inputActionReference = inputAction;
+        float horizontal = inputActionReference.ReadValue<Vector2>().x;
+        float vertical = inputActionReference.ReadValue<Vector2>().y;
         MovementInput = new Vector2(horizontal, vertical);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (InputActionReference.GetPressed(KeyCode.Space))
         {
             DropInput = true;
         }
