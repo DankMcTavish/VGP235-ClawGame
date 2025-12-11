@@ -95,12 +95,22 @@ public class ClawMovementController : MonoBehaviour
 
         // 3. Connect Claw to Gantry with ConfigurableJoint (Rope)
         clawJoint = gameObject.AddComponent<ConfigurableJoint>();
-        clawJoint.connectedBody = gantryRb;
+        clawJoint.connectedBody = gantryAnchor.GetComponent<Rigidbody>();
         clawJoint.autoConfigureConnectedAnchor = false;
         
         // Anchor points
-        clawJoint.anchor = Vector3.zero; // Top of claw
-        clawJoint.connectedAnchor = Vector3.zero; // Bottom of gantry
+        // We set anchors to zero (centers of objects) but we use the LIMIT to define the distance
+        clawJoint.anchor = Vector3.zero; 
+        clawJoint.connectedAnchor = Vector3.zero;
+        
+        // Calculate Initial Distance (Rope Length) based on Scene Placement
+        float initialDistance = Vector3.Distance(transform.position, gantryAnchor.transform.position);
+        
+        // If user placed them overlapping, default to small value
+        if (initialDistance < 0.1f) initialDistance = 0.1f;
+        
+        currentCableLength = initialDistance;
+        minCableLength = 0.1f;
         
         // Lock rotation? No, allow swing.
         // Lock Motion?
@@ -111,13 +121,9 @@ public class ClawMovementController : MonoBehaviour
         clawJoint.yMotion = ConfigurableJointMotion.Limited;
         clawJoint.zMotion = ConfigurableJointMotion.Limited;
         
-        // Set the Limit
-        minCableLength = 0.1f;
-        currentCableLength = minCableLength;
-        
         SoftJointLimit limit = new SoftJointLimit();
-        limit.limit = currentCableLength;
-        limit.bounciness = 0f; // No bounce
+        limit.limit = currentCableLength; // Set limit to current distance!
+        limit.bounciness = 0f; 
         limit.contactDistance = 0.1f;
         clawJoint.linearLimit = limit;
         
