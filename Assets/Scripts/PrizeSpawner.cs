@@ -32,9 +32,18 @@ public class PrizeSpawner : MonoBehaviour
         }
     }
 
+    [Header("Spawn Settings")]
+    public int initialSpawnCount = 10;
+
     void Start()
     {
         timer = spawnInterval;
+        
+        // Spawn initial prizes
+        for (int i = 0; i < initialSpawnCount; i++)
+        {
+            SpawnPrize();
+        }
     }
 
     void Update()
