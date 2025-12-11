@@ -378,7 +378,7 @@ MonoBehaviour:
   clawBody: {fileID: 6353699828447501786}
   clawGrabPoint: {fileID: 6197256789623691427}
   cableRenderer: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 15
   dropSpeed: 3
   liftSpeed: 2
   inputController: {fileID: 5258406513012944133}
@@ -387,11 +387,11 @@ MonoBehaviour:
   maxX: 5
   minZ: -5
   maxZ: 5
-  maxDropDistance: 6
-  minHeight: 0.5
-  grabDelay: 0.5
-  gripStrengthFactor: 0.8
-  grabRadius: 1
+  maxDropDistance: 4
+  minHeight: 1
+  grabDelay: 0.75
+  gripStrengthFactor: 0.9
+  grabRadius: 0.2
   grabbableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -642,9 +642,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6467768641726361159}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

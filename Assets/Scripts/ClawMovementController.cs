@@ -283,6 +283,10 @@ public class ClawMovementController : MonoBehaviour
             Transform parent = clawGrabPoint != null ? clawGrabPoint : clawBody.transform;
             grabbedObject.transform.SetParent(parent);
             grabbedObject.transform.localPosition = Vector3.zero; 
+            
+            // Disable collider to prevent self-collision with claw
+            Collider col = grabbedObject.GetComponent<Collider>();
+            if (col != null) col.enabled = false;
         }
     }
 
@@ -291,6 +295,10 @@ public class ClawMovementController : MonoBehaviour
         if (grabbedObject == null) return;
 
         grabbedObject.transform.SetParent(null);
+
+        // Re-enable collider
+        Collider col = grabbedObject.GetComponent<Collider>();
+        if (col != null) col.enabled = true;
 
         Rigidbody prizeRb = grabbedObject.GetComponent<Rigidbody>();
         if (prizeRb != null)
