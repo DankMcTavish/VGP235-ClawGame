@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
     {
         score += points;
         Debug.Log("Score Updated: " + score);
+        if (uiController != null)
+        {
+            uiController.UpdateScoreText(score);
+        }
+
         CheckWinCondition();
     }
 

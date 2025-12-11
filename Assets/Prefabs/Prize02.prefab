@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4896253836080291448}
   - component: {fileID: 2971477831651441431}
   - component: {fileID: 4742343723523265345}
+  - component: {fileID: -3492759521047621349}
   m_Layer: 3
   m_Name: Prize02
   m_TagString: Prize
@@ -136,3 +137,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3492759521047621349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680283754032970803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ed5b2574c5ffc4e985fe5a3e8fc02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: 20
