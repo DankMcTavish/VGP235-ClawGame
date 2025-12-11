@@ -52,7 +52,7 @@ MonoBehaviour:
   gameOverMusic: {fileID: 8300000, guid: 15ae68bb4ca0c6c41a4ae4b69835ab39, type: 3}
   menuMusic: {fileID: 8300000, guid: 2ba865e03b336f4488149117179f91d1, type: 3}
   pauseMusic: {fileID: 8300000, guid: b30c5dd679bfc3c40ba0ac0b52e12edf, type: 3}
-  clawObject: {fileID: 1191097590018621157, guid: 6dc2f4cf11ea2d2449d52468fccfb0a9, type: 3}
+  clawObject: {fileID: 3020634730509914143, guid: 04d5a37437e6bf24e8f6c394175c2a15, type: 3}
   clawMovement: {fileID: 0}
   clawExtend: {fileID: 0}
   clawRetract: {fileID: 0}
