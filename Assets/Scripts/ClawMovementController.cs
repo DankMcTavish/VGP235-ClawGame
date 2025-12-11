@@ -3,7 +3,12 @@ using System.Collections;
 
 public class ClawMovementController : MonoBehaviour
 {
-    [Header("Claw Movement Settings")]
+    [Header("Claw Components")]
+    public Rigidbody clawBody; // ASSIGN THE SPHERE HERE
+    public Transform clawGrabPoint; // Assign the grab point (child of sphere)
+    public LineRenderer cableRenderer; // Assign the Line (cylinder) or a LineRenderer component
+
+    [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
     public float dropSpeed = 3.0f;
     public float liftSpeed = 2.0f;
@@ -18,14 +23,9 @@ public class ClawMovementController : MonoBehaviour
     public float minZ = -5f;
     public float maxZ = 5f;
 
-    [Header("Claw Components")]
-    public Transform clawGrabPoint;
-    public Transform customGantry; // User assigned gantry
-    public LineRenderer cableRenderer; // Visual for the rope
-
     [Header("Drop Settings")]
-    public float maxDropDistance = 6f; // Maximum cable length
-    public float minHeight = 0.5f; // floor height check
+    public float maxDropDistance = 6f; 
+    public float minHeight = 0.5f; 
     public float grabDelay = 0.5f;
 
     [Header("Grab Settings")]
@@ -37,97 +37,69 @@ public class ClawMovementController : MonoBehaviour
     private bool isReturning = false;
     private GameObject grabbedObject;
 
-    // Physics / Swinging Implementation
-    private GameObject gantryAnchor; // The actual anchor we use
-    private Rigidbody clawRb;
+    // Physics
     private ConfigurableJoint clawJoint;
-    
-    // Physics State
     private float currentCableLength;
-    private float minCableLength = 0.5f;
+    private float minCableLength = 0.1f;
     private Vector3 initialGantryPos;
 
     void Start()
     {
-        // 1. Setup Gantry (Anchor)
-        if (customGantry != null)
-        {
-            // Use user provided Gantry
-            gantryAnchor = customGantry.gameObject;
-            initialGantryPos = gantryAnchor.transform.position;
-            
-            // Ensure it has RB
-            Rigidbody gantryRb = gantryAnchor.GetComponent<Rigidbody>();
-            if (gantryRb == null) 
-            {
-                gantryRb = gantryAnchor.AddComponent<Rigidbody>();
-                gantryRb.isKinematic = true;
-            }
-        }
-        else
-        {
-            // Auto-create fallback
-            string gantryName = "ClawGantry_Anchor_Auto";
-            GameObject existingGantry = GameObject.Find(gantryName);
-            if (existingGantry != null) Destroy(existingGantry);
+        Debug.Log("Initializing Gantry-Based Claw Controller...");
 
-            gantryAnchor = new GameObject(gantryName);
-            gantryAnchor.transform.position = transform.position; 
-            initialGantryPos = transform.position;
-            
-            Rigidbody gantryRb = gantryAnchor.AddComponent<Rigidbody>();
-            gantryRb.isKinematic = true;
+        if (clawBody == null)
+        {
+            Debug.LogError("Claw Body is not assigned! Please assign the Sphere object to 'Claw Body'.");
+            return;
         }
 
-        // 2. Setup Claw Body (This Object)
-        clawRb = GetComponent<Rigidbody>();
-        if (clawRb == null) clawRb = gameObject.AddComponent<Rigidbody>();
-        
-        clawRb.mass = 5f; 
-        clawRb.linearDamping = 0.5f; 
-        clawRb.angularDamping = 1.0f;
-        clawRb.useGravity = true;
-        clawRb.isKinematic = false;
-        
-        // Zero out any velocity
-        clawRb.linearVelocity = Vector3.zero;
-        clawRb.angularVelocity = Vector3.zero;
+        // 1. Setup Gantry (This Object)
+        initialGantryPos = transform.position;
+        Rigidbody gantryRb = GetComponent<Rigidbody>();
+        if (gantryRb == null)
+        {
+            gantryRb = gameObject.AddComponent<Rigidbody>();
+            gantryRb.isKinematic = true; // Gantry is kinematic (moved by script)
+        }
 
-        // 3. Connect Claw to Gantry with ConfigurableJoint (Rope)
-        clawJoint = gameObject.AddComponent<ConfigurableJoint>();
-        clawJoint.connectedBody = gantryAnchor.GetComponent<Rigidbody>();
+        // 2. Setup Claw Body (The Sphere)
+        // CRITICAL FIX: Detach from Gantry so physics don't fight hierarchy
+        clawBody.transform.SetParent(null);
+
+        clawBody.mass = 5f;
+        clawBody.linearDamping = 0.5f;
+        clawBody.angularDamping = 1.0f;
+        clawBody.useGravity = true;
+        clawBody.isKinematic = false;
+
+        // 3. Connect Claw to Gantry
+        // We add the joint to the CLAW BODY and connect it to US (Gantry)
+        clawJoint = clawBody.gameObject.AddComponent<ConfigurableJoint>();
+        clawJoint.connectedBody = gantryRb;
         clawJoint.autoConfigureConnectedAnchor = false;
+
+        // Anchor on Claw (Center)
+        clawJoint.anchor = Vector3.zero;
         
-        // Anchor points
-        // We set anchors to zero (centers of objects) but we use the LIMIT to define the distance
-        clawJoint.anchor = Vector3.zero; 
-        clawJoint.connectedAnchor = Vector3.zero;
+        // Anchor on Gantry (Relative position of claw at start)
+        // This ensures the rope starts exactly vertical or wherever the claw is placed
+        // Note: We calculate this BEFORE detaching or use the initial relative position if we saved it, 
+        // but since we just detached, the world positions haven't changed yet.
+        clawJoint.connectedAnchor = transform.InverseTransformPoint(clawBody.position);
+
+        // Setup Limits
+        currentCableLength = 0.1f; // Start tight
         
-        // Calculate Initial Distance (Rope Length) based on Scene Placement
-        float initialDistance = Vector3.Distance(transform.position, gantryAnchor.transform.position);
-        
-        // If user placed them overlapping, default to small value
-        if (initialDistance < 0.1f) initialDistance = 0.1f;
-        
-        currentCableLength = initialDistance;
-        minCableLength = 0.1f;
-        
-        // Lock rotation? No, allow swing.
-        // Lock Motion?
-        // We want "Connected" behavior, so X/Y/Z are locked relative to anchor... 
-        // BUT we want swinging.
-        // Swinging means we are constrained by a RADIUS (LinearLimit).
         clawJoint.xMotion = ConfigurableJointMotion.Limited;
         clawJoint.yMotion = ConfigurableJointMotion.Limited;
         clawJoint.zMotion = ConfigurableJointMotion.Limited;
-        
-        SoftJointLimit limit = new SoftJointLimit();
-        limit.limit = currentCableLength; // Set limit to current distance!
-        limit.bounciness = 0f; 
-        limit.contactDistance = 0.1f;
-        clawJoint.linearLimit = limit;
-        
-        // 4. Setup LineRenderer if missing
+
+        clawJoint.projectionMode = JointProjectionMode.PositionAndRotation;
+        clawJoint.projectionDistance = 0.1f;
+
+        UpdateCableLimit();
+
+        // 4. Setup LineRenderer
         if (cableRenderer == null)
         {
             cableRenderer = gameObject.AddComponent<LineRenderer>();
@@ -141,25 +113,14 @@ public class ClawMovementController : MonoBehaviour
 
     void Update()
     {
-        // Update Rope Visual
-        if (cableRenderer != null && gantryAnchor != null)
-        {
-            cableRenderer.SetPosition(0, gantryAnchor.transform.position);
-            cableRenderer.SetPosition(1, transform.position);
-        }
+        if (clawBody == null) return;
 
-        // Update Cable Length Limit
-        if (clawJoint != null)
-        {
-            SoftJointLimit limit = clawJoint.linearLimit;
-            limit.limit = currentCableLength;
-            clawJoint.linearLimit = limit;
-        }
+        UpdateVisuals();
+        UpdateCableLimit();
 
-        // Logic
         if (!isDropping && !isReturning)
         {
-            HandleGantryMovement();
+            HandleMovement();
 
             if (inputController != null && inputController.DropInput)
             {
@@ -168,25 +129,56 @@ public class ClawMovementController : MonoBehaviour
         }
     }
 
-    void HandleGantryMovement()
+    void UpdateVisuals()
     {
-        if (gantryAnchor == null) return;
+        if (cableRenderer != null && clawJoint != null)
+        {
+            // Start point: Anchor on Gantry (World Space)
+            Vector3 startPos = transform.TransformPoint(clawJoint.connectedAnchor);
+            // End point: Claw Body Center
+            Vector3 endPos = clawBody.position;
 
-        // Horizontal movement (X-axis)
+            cableRenderer.SetPosition(0, startPos);
+            cableRenderer.SetPosition(1, endPos);
+        }
+    }
+
+    void UpdateCableLimit()
+    {
+        if (clawJoint != null)
+        {
+            SoftJointLimit limit = new SoftJointLimit();
+            limit.limit = currentCableLength;
+            limit.bounciness = 0f;
+            limit.contactDistance = 0.1f;
+            clawJoint.linearLimit = limit;
+        }
+    }
+
+    void HandleMovement()
+    {
+        // Move THIS object (The Gantry)
         float horizontal = inputController.MovementInput.x;
         float vertical = inputController.MovementInput.y;
 
         if (horizontal == 0 && vertical == 0) return;
 
         Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
-        Vector3 newPos = gantryAnchor.transform.position + movement;
+        Vector3 newPos = transform.position + movement;
 
-        // Clamp position within boundaries
         newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
         newPos.z = Mathf.Clamp(newPos.z, minZ, maxZ);
-        
-        // Apply Move
-        gantryAnchor.transform.position = newPos;
+
+        // Use MovePosition for better physics interaction since we are a Rigidbody now
+        Rigidbody gantryRb = GetComponent<Rigidbody>();
+        if (gantryRb != null)
+        {
+            gantryRb.MovePosition(newPos);
+        }
+        else
+        {
+            transform.position = newPos;
+        }
     }
 
     public IEnumerator DropSequence()
@@ -195,23 +187,23 @@ public class ClawMovementController : MonoBehaviour
 
         if (gripController != null) gripController.OpenGrip();
 
-        // 1. Drop Down (Extend Cable)
+        // 1. Drop
         while (currentCableLength < maxDropDistance)
         {
             currentCableLength += dropSpeed * Time.deltaTime;
             yield return null;
         }
 
-        // 2. Wait at bottom
+        // 2. Wait
         yield return new WaitForSeconds(grabDelay);
 
         // 3. Grab
         GrabNearbyObject();
         if (gripController != null) gripController.GripObject();
         
-        yield return new WaitForSeconds(0.5f); // Wait for close
+        yield return new WaitForSeconds(0.5f);
 
-        // 4. Lift Up (Retract Cable)
+        // 4. Lift
         while (currentCableLength > minCableLength)
         {
             currentCableLength -= liftSpeed * Time.deltaTime;
@@ -219,7 +211,7 @@ public class ClawMovementController : MonoBehaviour
         }
         currentCableLength = minCableLength;
 
-        // 5. Slippage Check
+        // 5. Slip Check
         if (grabbedObject != null)
         {
             if (Random.value > gripStrengthFactor)
@@ -235,13 +227,20 @@ public class ClawMovementController : MonoBehaviour
             isReturning = true;
             isDropping = false;
 
-            while (Vector3.Distance(gantryAnchor.transform.position, initialGantryPos) > 0.1f)
+            // Move Gantry back to start
+            while (Vector3.Distance(transform.position, initialGantryPos) > 0.1f)
             {
-                gantryAnchor.transform.position = Vector3.MoveTowards(
-                    gantryAnchor.transform.position,
+                // Use MovePosition here too if possible, but MoveTowards is okay for return
+                Vector3 targetPos = Vector3.MoveTowards(
+                    transform.position,
                     initialGantryPos,
                     moveSpeed * Time.deltaTime
                 );
+                
+                Rigidbody gantryRb = GetComponent<Rigidbody>();
+                if (gantryRb != null) gantryRb.MovePosition(targetPos);
+                else transform.position = targetPos;
+
                 yield return null;
             }
             
@@ -260,7 +259,7 @@ public class ClawMovementController : MonoBehaviour
     void GrabNearbyObject()
     {
         Collider[] hitColliders = Physics.OverlapSphere(
-            clawGrabPoint != null ? clawGrabPoint.position : transform.position,
+            clawGrabPoint != null ? clawGrabPoint.position : clawBody.position,
             grabRadius,
             grabbableLayer
         );
@@ -268,6 +267,9 @@ public class ClawMovementController : MonoBehaviour
         if (hitColliders.Length > 0)
         {
             GameObject closest = hitColliders[0].gameObject;
+
+            // Safety: Don't grab self or gantry
+            if (closest == clawBody.gameObject || closest == gameObject) return;
             
             grabbedObject = closest;
             
@@ -277,7 +279,9 @@ public class ClawMovementController : MonoBehaviour
                 prizeRb.isKinematic = true; 
             }
             
-            grabbedObject.transform.SetParent(clawGrabPoint != null ? clawGrabPoint : transform);
+            // Parent to Grab Point if available, otherwise Body
+            Transform parent = clawGrabPoint != null ? clawGrabPoint : clawBody.transform;
+            grabbedObject.transform.SetParent(parent);
             grabbedObject.transform.localPosition = Vector3.zero; 
         }
     }
@@ -305,12 +309,10 @@ public class ClawMovementController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(clawGrabPoint.position, grabRadius);
         }
-        
-        // Draw cable limits if playing
-        if (Application.isPlaying && gantryAnchor != null)
+        else if (clawBody != null)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(gantryAnchor.transform.position, transform.position);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(clawBody.position, grabRadius);
         }
     }
 }
