@@ -33,6 +33,7 @@ public class PrizeSpawner : MonoBehaviour
     }
 
     [Header("Spawn Settings")]
+    public Collider spawnArea;              // Collider defining the spawn volume
     public int initialSpawnCount = 10;
 
     void Start()
@@ -58,10 +59,27 @@ public class PrizeSpawner : MonoBehaviour
 
     void SpawnPrize()
     {
-        if (prizePrefabs.Length == 0 || spawnPoints.Length == 0)
+        if (prizePrefabs.Length == 0)
             return;
 
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
+        Vector3 spawnPos = Vector3.zero;
+        Quaternion spawnRot = Quaternion.identity;
+
+        if (spawnArea != null)
+        {
+            spawnPos = GetRandomPointInBounds(spawnArea.bounds);
+            spawnRot = Random.rotation; // Randomize rotation for "pile" effect
+        }
+        else if (spawnPoints.Length > 0)
+        {
+            int spawnIndex = Random.Range(0, spawnPoints.Length);
+            spawnPos = spawnPoints[spawnIndex].position;
+            spawnRot = Quaternion.identity;
+        }
+        else
+        {
+            return; // No spawn method available
+        }
 
         // Weighted Random Selection
         GameObject prefab = GetWeightedRandomPrize();
@@ -69,10 +87,19 @@ public class PrizeSpawner : MonoBehaviour
 
         if (prize != null)
         {
-            prize.transform.position = spawnPoints[spawnIndex].position;
-            prize.transform.rotation = Quaternion.identity;
+            prize.transform.position = spawnPos;
+            prize.transform.rotation = spawnRot;
             prize.SetActive(true);
         }
+    }
+
+    Vector3 GetRandomPointInBounds(Bounds bounds)
+    {
+        return new Vector3(
+            Random.Range(bounds.min.x, bounds.max.x),
+            Random.Range(bounds.min.y, bounds.max.y),
+            Random.Range(bounds.min.z, bounds.max.z)
+        );
     }
 
     GameObject GetWeightedRandomPrize()
