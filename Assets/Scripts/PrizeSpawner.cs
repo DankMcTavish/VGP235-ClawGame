@@ -61,10 +61,10 @@ public class PrizeSpawner : MonoBehaviour
         if (prizePrefabs.Length == 0 || spawnPoints.Length == 0)
             return;
 
-        int prizeIndex = Random.Range(0, prizePrefabs.Length);
         int spawnIndex = Random.Range(0, spawnPoints.Length);
 
-        GameObject prefab = prizePrefabs[prizeIndex];
+        // Weighted Random Selection
+        GameObject prefab = GetWeightedRandomPrize();
         GameObject prize = GetPrizeFromPool(prefab);
 
         if (prize != null)
@@ -73,6 +73,42 @@ public class PrizeSpawner : MonoBehaviour
             prize.transform.rotation = Quaternion.identity;
             prize.SetActive(true);
         }
+    }
+
+    GameObject GetWeightedRandomPrize()
+    {
+         // Calculate total weight
+        float totalWeight = 0f;
+        List<float> weights = new List<float>();
+
+        foreach (GameObject p in prizePrefabs)
+        {
+            PrizeController pc = p.GetComponent<PrizeController>();
+            float weight = 1.0f;
+            if (pc != null)
+            {
+                 // Inverse weight: Higher score = Lower weight
+                 // Example: Score 10 -> Weight 1000/11 ~ 90
+                 // Example: Score 100 -> Weight 1000/101 ~ 10
+                 weight = 1000f / (pc.scoreValue + 1f); 
+            }
+            weights.Add(weight);
+            totalWeight += weight;
+        }
+
+        float randomValue = Random.Range(0, totalWeight);
+        float cursor = 0f;
+
+        for (int i = 0; i < prizePrefabs.Length; i++)
+        {
+            cursor += weights[i];
+            if (cursor >= randomValue)
+            {
+                return prizePrefabs[i];
+            }
+        }
+
+        return prizePrefabs[0]; // Fallback
     }
 
     GameObject GetPrizeFromPool(GameObject prefab)

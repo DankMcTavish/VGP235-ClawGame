@@ -62,18 +62,32 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void ShowMainMenu()
+    public void UpdateScoreText(int score)
     {
-        mainMenu.SetActive(true);
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
+    }
+
+    private void HideAllMenus()
+    {
+        mainMenu.SetActive(false);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         winningScreen.SetActive(false);
+    }
+
+    public void ShowMainMenu()
+    {
+        HideAllMenus();
+        mainMenu.SetActive(true);
         Time.timeScale = 0f; // Ensure game is paused in main menu
     }
 
     public void StartGame()
     {
-        mainMenu.SetActive(false);
+        HideAllMenus();
         gameManager.StartGame();
     }
 
@@ -90,6 +104,7 @@ public class UIController : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        HideAllMenus();
         pauseMenu.SetActive(true);
         gameManager.PauseGame();
     }
@@ -97,24 +112,25 @@ public class UIController : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        pauseMenu.SetActive(false);
+        HideAllMenus();
         gameManager.ResumeGame();
     }
 
     public void ShowGameOverMenu()
     {
+        HideAllMenus();
         gameOverMenu.SetActive(true);
     }
 
     public void RetryGame()
     {
-        gameOverMenu.SetActive(false);
-        winningScreen.SetActive(false);
+        HideAllMenus();
         gameManager.RestartGame();
     }
 
     public void ShowWinningScreen()
     {
+        HideAllMenus();
         winningScreen.SetActive(true);
     }
 
