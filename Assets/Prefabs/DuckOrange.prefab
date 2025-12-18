@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: 5
+  prizeID: Prize02
 --- !u!54 &2453970215355094864
 Rigidbody:
   m_ObjectHideFlags: 0
