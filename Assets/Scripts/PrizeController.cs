@@ -32,10 +32,8 @@ public class PrizeController : MonoBehaviour
         else if (scoreValue <= 50) scaleFactor = 0.8f; // Smaller
         else scaleFactor = 0.6f; // Tiny for high value
 
-        // Apply scale only once to avoid compounding if Start runs multiple times (though unlikely here)
-        // Better: Set absolute localScale based on prefab default or reset it first if needed.
-        // For now, assuming prefab scale implies a base of 1.
-        transform.localScale = Vector3.one * scaleFactor; 
+        // Apply scale relative to the object's initial scale (e.g. from prefab)
+        transform.localScale = transform.localScale * scaleFactor; 
 
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb == null)

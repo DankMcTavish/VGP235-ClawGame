@@ -41,7 +41,7 @@ public class ConfigManager : MonoBehaviour
             if (Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.Keys != null)
             {
                  var value = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue(key);
-                 if (value.Source != Firebase.RemoteConfig.ValueSource.Static)
+                 if (value.Source != Firebase.RemoteConfig.ValueSource.StaticValue)
                  {
                      return value.LongValue;
                  }
