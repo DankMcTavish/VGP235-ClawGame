@@ -1,25 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-# Unity Large Files
-*.fbx filter=lfs diff=lfs merge=lfs -text
-*.obj filter=lfs diff=lfs merge=lfs -text
-*.blend filter=lfs diff=lfs merge=lfs -text
-
-# Video Files
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mov filter=lfs diff=lfs merge=lfs -text
-# Audio Files
-*.wav filter=lfs diff=lfs merge=lfs -text
-*.mp3 filter=lfs diff=lfs merge=lfs -text
-# Image Files (large textures)
-*.psd filter=lfs diff=lfs merge=lfs -text
-*.tga filter=lfs diff=lfs merge=lfs -text
-*.exr filter=lfs diff=lfs merge=lfs -text
-# Firebase & Native Libraries
-*.dll filter=lfs diff=lfs merge=lfs -text
-*.aar filter=lfs diff=lfs merge=lfs -text
-*.a filter=lfs diff=lfs merge=lfs -text
-*.so filter=lfs diff=lfs merge=lfs -text
-# Unity Packages
-*.unitypackage filter=lfs diff=lfs merge=lfs -text
 *.bundle filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
