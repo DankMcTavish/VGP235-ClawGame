@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class PrizeController : MonoBehaviour
 {
     public int scoreValue = 10;
@@ -11,7 +12,7 @@ public class PrizeController : MonoBehaviour
         // Higher score = smaller size. 
         // Logic: Inverse proportional or simple Lerp.
         // Let's assume score ranges roughly 10 (easy) to 100 (hard).
-        
+
         float scaleFactor = 1.0f;
         if (scoreValue <= 10) scaleFactor = 1.2f; // Large for low value
         else if (scoreValue <= 20) scaleFactor = 1.0f; // Normal

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63118266164",
+    "project_id": "clawgame-80c9b",
+    "storage_bucket": "clawgame-80c9b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63118266164:android:8d87202acf87115bd29f61",
+        "android_client_info": {
+          "package_name": "com.UnityTechnologies.com.unity.template.urpblank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLlcziAMNbqWPdgJDGrWSbPPZpogRf1Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
