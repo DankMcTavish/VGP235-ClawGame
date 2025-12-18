@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lives: 10'
+  m_text: 'Time: 098'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1957,23 +1957,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949221892}
   m_CullTransparentMesh: 1
---- !u!1 &1045154322 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8362997254986142028, guid: b9200d81a8606ff4c9fc90bd9d92870c, type: 3}
-  m_PrefabInstance: {fileID: 409338545329737255}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1045154325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045154322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c46b8945b53bda4da8526f202463b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1048618248
 GameObject:
   m_ObjectHideFlags: 0
@@ -4922,10 +4905,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8362997254986142028, guid: b9200d81a8606ff4c9fc90bd9d92870c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1045154325}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9200d81a8606ff4c9fc90bd9d92870c, type: 3}
 --- !u!1001 &3135727965986988540
 PrefabInstance:

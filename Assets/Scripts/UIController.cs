@@ -23,19 +23,29 @@ public class UIController : MonoBehaviour
 
     [Header("Text")]
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI timeText;    // countdown timer display
     public TextMeshProUGUI levelText;
 
     [Header("Managers")]
     public GameManager gameManager;
     public DifficultyManager difficultyManager;
 
+    [Header("Defaults")]
+    public int defaultScore = 0;
+    public int defaultLives = 3; // kept for backwards compatibility if needed
+    public int defaultLevel = 1;
+
+    // Current state (keeps UI in sync)
+    private int currentScore;
+    private int currentLives;
+    private int currentLevel;
+
     private bool isPaused = false;
 
     void Start()
     {
-        if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
-        if (difficultyManager == null) difficultyManager = FindFirstObjectByType<DifficultyManager>();
+        if (gameManager == null) gameManager = FindObjectOfType<GameManager>();
+        if (difficultyManager == null) difficultyManager = FindObjectOfType<DifficultyManager>();
 
         startButton.onClick.AddListener(StartGame);
         pauseButton.onClick.AddListener(PauseGame);
@@ -44,6 +54,17 @@ public class UIController : MonoBehaviour
         continueButton.onClick.AddListener(ContinueToNextLevel);
         mainMenuButton.onClick.AddListener(ReturnToMainMenu);
         exitButton.onClick.AddListener(ExitGame);
+
+        // Initialize current state from defaults
+        currentScore = defaultScore;
+        currentLives = defaultLives;
+        currentLevel = defaultLevel;
+
+        // Update UI with default values
+        UpdateScoreText(currentScore);
+        UpdateTimeText(0f); // show 00:00 until game starts
+        UpdateLevelText(currentLevel);
+
         ShowMainMenu();
     }
 
@@ -64,9 +85,36 @@ public class UIController : MonoBehaviour
 
     public void UpdateScoreText(int score)
     {
+        currentScore = score;
         if (scoreText != null)
         {
             scoreText.text = "Score: " + score;
+        }
+    }
+
+    // Update the timer display. Accepts remaining seconds (float) and formats mm:ss
+    public void UpdateTimeText(float remainingSeconds)
+    {
+        if (timeText == null) return;
+
+        if (remainingSeconds <= 0f)
+        {
+            timeText.text = "Time: 00:00";
+            return;
+        }
+
+        int totalSeconds = Mathf.CeilToInt(remainingSeconds);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        timeText.text = $"Time: {minutes:00}:{seconds:00}";
+    }
+
+    public void UpdateLevelText(int level)
+    {
+        currentLevel = level;
+        if (levelText != null)
+        {
+            levelText.text = "Level: " + level;
         }
     }
 
@@ -88,6 +136,11 @@ public class UIController : MonoBehaviour
     public void StartGame()
     {
         HideAllMenus();
+        Time.timeScale = 1f;
+        // ensure UI starts at the configured defaults when a game starts
+        UpdateScoreText(currentScore);
+        UpdateLevelText(currentLevel);
+
         gameManager.StartGame();
     }
 
@@ -113,6 +166,7 @@ public class UIController : MonoBehaviour
     {
         isPaused = false;
         HideAllMenus();
+        Time.timeScale = 1f;
         gameManager.ResumeGame();
     }
 
@@ -125,6 +179,13 @@ public class UIController : MonoBehaviour
     public void RetryGame()
     {
         HideAllMenus();
+        // Reset state to defaults when retrying
+        currentScore = defaultScore;
+        currentLives = defaultLives;
+        currentLevel = defaultLevel;
+        UpdateScoreText(currentScore);
+        UpdateLevelText(currentLevel);
+
         gameManager.RestartGame();
     }
 
@@ -141,6 +202,11 @@ public class UIController : MonoBehaviour
             difficultyManager.NextDifficulty();
         }
         winningScreen.SetActive(false);
+
+        // advance level counter
+        currentLevel++;
+        UpdateLevelText(currentLevel);
+
         gameManager.RestartGame();
     }
 

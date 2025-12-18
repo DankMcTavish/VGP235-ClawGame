@@ -50,12 +50,11 @@ MonoBehaviour:
   - {fileID: 7771873892803914623, guid: 0e56370469b04fa468354f1dbd11e867, type: 3}
   - {fileID: 7771873892803914623, guid: 9bd54d44f5b80d54eaf0142ac79e2e46, type: 3}
   - {fileID: 7771873892803914623, guid: 58c9a44fb33eff541baa46d9bada2a63, type: 3}
-  - {fileID: 4862477260258149108, guid: b7f23941ba45f004899f56dbe6393663, type: 3}
   spawnPoints: []
-  poolSizePerPrefab: 30
+  poolSizePerPrefab: 100
   spawnInterval: 120
   spawnArea: {fileID: 4673841046061833063}
-  initialSpawnCount: 300
+  initialSpawnCount: 200
 --- !u!1 &8634695701988341481
 GameObject:
   m_ObjectHideFlags: 0
