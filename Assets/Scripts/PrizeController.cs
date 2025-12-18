@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ public class PrizeController : MonoBehaviour
     public string prizeID = "prize_default"; // Identifier for Remote Config
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    async Task Start()
     {
         // Update score from ConfigManager if available
         if (ConfigManager.Instance != null)
