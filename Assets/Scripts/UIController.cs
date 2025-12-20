@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class UIController : MonoBehaviour
@@ -135,13 +136,8 @@ public class UIController : MonoBehaviour
 
     public void StartGame()
     {
-        HideAllMenus();
-        Time.timeScale = 1f;
-        // ensure UI starts at the configured defaults when a game starts
-        UpdateScoreText(currentScore);
-        UpdateLevelText(currentLevel);
-
-        gameManager.StartGame();
+        // Load Scene 2 (Gameplay)
+        SceneManager.LoadScene(2);
     }
 
     public void ToggleDifficulty()
