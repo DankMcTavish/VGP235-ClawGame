@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5142263459106513829
+--- !u!1 &4323387122861373860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4740600191246853342}
-  - component: {fileID: 8501755039075272440}
+  - component: {fileID: 6494544846958980076}
+  - component: {fileID: 3594495279714140840}
   m_Layer: 0
-  m_Name: DifficultyManager
+  m_Name: AppLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4740600191246853342
+--- !u!4 &6494544846958980076
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5142263459106513829}
+  m_GameObject: {fileID: 4323387122861373860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6279652, y: -4.1696935, z: -18.336794}
+  m_LocalPosition: {x: 1.2795813, y: -3.563878, z: 0.79781526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8501755039075272440
+--- !u!114 &3594495279714140840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5142263459106513829}
+  m_GameObject: {fileID: 4323387122861373860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c81cd40ed2d62b4ca9cb6d501c88d64, type: 3}
+  m_Script: {fileID: 11500000, guid: 781d270cf8614c348a4b67504356a5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prizeToWin: 0
-  clawSpeedMultiplier: 0
-  timeLimitMultiplier: 0
+  _firebaseManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
+  _configManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
+  _difficultyManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
+  _audioManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
