@@ -2,6 +2,17 @@ using UnityEngine;
 
 public class CollectionManager : MonoBehaviour
 {
+    public static CollectionManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+            return; 
+        }
+        Instance = this;
+    }
     [Header("Collected Items")]
     public GameObject[] collectedItems;
 

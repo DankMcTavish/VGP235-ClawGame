@@ -2,6 +2,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+            return; 
+        }
+        Instance = this;
+    }
     [Header("Audio Settings")]
     public float masterVolume = 1.0f;
     public float musicVolume = 0.8f;

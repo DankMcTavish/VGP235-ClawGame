@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // SOLID
 // S - Separation of Concerns: A class should only be responsible for one thing
@@ -13,6 +15,7 @@ using UnityEngine;
 public class AppLoader : AsyncLoader
 {
     // The only singleton you should have.
+    public static AppLoader Instance { get { return _instance; } }
     private static AppLoader _instance;
 
     public static Transform SystemsParent { get { return _systemsParent; } }
@@ -23,6 +26,7 @@ public class AppLoader : AsyncLoader
     [SerializeField] private GameObject _configManagerPrefab;
     [SerializeField] private GameObject _difficultyManagerPrefab;
     [SerializeField] private GameObject _audioManagerPrefab;
+    [SerializeField] private GameObject _collectionManagerPrefab;
 
     protected override void Awake()
     {
@@ -99,13 +103,19 @@ public class AppLoader : AsyncLoader
             Debug.Log("<color=lime>Difficulty Manager Loaded</color>");
         }
 
-        // 4. Audio Manager
-        if (_audioManagerPrefab != null)
-        {
-            GameObject go = Instantiate(_audioManagerPrefab, _systemsParent);
-            go.name = "AudioManager";
-            Debug.Log("<color=lime>Audio Manager Loaded</color>");
-        }
+    // 4. Audio Manager
+    if (_audioManagerPrefab != null)
+    {
+        Object.Instantiate(_audioManagerPrefab, _systemsParent).name = "AudioManager";
+        Debug.Log("<color=lime>Audio Manager Loaded</color>");
+    }
+
+    // 5. Collection Manager
+    if (_collectionManagerPrefab != null)
+    {
+        Object.Instantiate(_collectionManagerPrefab, _systemsParent).name = "CollectionManager";
+        Debug.Log("<color=lime>Collection Manager Loaded</color>");
+    }
 
         yield return null;
     }
@@ -113,5 +123,44 @@ public class AppLoader : AsyncLoader
     private void OnComplete()
     {
         Debug.Log("GameLoader Completed");
+    }
+
+    public void LoadSceneAdditive(int index)
+    {
+        StartCoroutine(LoadSceneAdditiveRoutine(index));
+    }
+
+    public void UnloadScene(int index)
+    {
+        StartCoroutine(UnloadSceneRoutine(index));
+    }
+
+    public void TransitionToScene(int newSceneIndex, int oldSceneIndex)
+    {
+        StartCoroutine(TransitionRoutine(newSceneIndex, oldSceneIndex));
+    }
+
+    private IEnumerator LoadSceneAdditiveRoutine(int index)
+    {
+        yield return SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+        // Optionally make the new scene active so Instantiate goes there by default
+        Scene newScene = SceneManager.GetSceneByBuildIndex(index);
+        if (newScene.IsValid())
+        {
+            SceneManager.SetActiveScene(newScene);
+        }
+    }
+
+    private IEnumerator UnloadSceneRoutine(int index)
+    {
+        yield return SceneManager.UnloadSceneAsync(index);
+    }
+
+    private IEnumerator TransitionRoutine(int newSceneIndex, int oldSceneIndex)
+    {
+        // Unload old
+        yield return UnloadSceneRoutine(oldSceneIndex);
+        // Load new
+        yield return LoadSceneAdditiveRoutine(newSceneIndex);
     }
 }

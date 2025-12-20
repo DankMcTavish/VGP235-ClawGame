@@ -46,7 +46,8 @@ public class UIController : MonoBehaviour
     void Start()
     {
         if (gameManager == null) gameManager = FindObjectOfType<GameManager>();
-        if (difficultyManager == null) difficultyManager = FindObjectOfType<DifficultyManager>();
+        // DifficultyManager is global now
+        if (difficultyManager == null) difficultyManager = DifficultyManager.Instance;
 
         startButton.onClick.AddListener(StartGame);
         pauseButton.onClick.AddListener(PauseGame);
@@ -136,8 +137,9 @@ public class UIController : MonoBehaviour
 
     public void StartGame()
     {
-        // Load Scene 2 (Gameplay)
-        SceneManager.LoadScene(2);
+        // Transition from Current Scene (Main Menu) to Gameplay (Index 2)
+        // We assume this script is in the Main Menu scene.
+        AppLoader.Instance.TransitionToScene(2, gameObject.scene.buildIndex);
     }
 
     public void ToggleDifficulty()

@@ -11,20 +11,26 @@ public enum DifficultyLevel
 
 public class DifficultyManager : MonoBehaviour
 {
+    public static DifficultyManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+            return; 
+        }
+        Instance = this;
+    }
     [Header("Difficulty Settings")]
     public int prizeToWin;
     public float clawSpeedMultiplier;
+    public float timeLimit; // Store timeLimit here instead of pushing to GameManager
     public float timeLimitMultiplier;
 
 
 
     public DifficultyLevel currentDifficulty;
-
-    private void Start()
-    {
-        SetDifficulty(DifficultyLevel.Medium);
-    }
-
 
     public void SetDifficulty(DifficultyLevel level)
     {
@@ -33,19 +39,19 @@ public class DifficultyManager : MonoBehaviour
         {
             case DifficultyLevel.Easy:
                 prizeToWin = 3;
-                FindFirstObjectByType<GameManager>().timeLimit = 200f;
+                timeLimit = 200f;
                 break;
             case DifficultyLevel.Medium:
                 prizeToWin = 5;
-                FindFirstObjectByType<GameManager>().timeLimit = 120f;
+                timeLimit = 120f;
                 break;
             case DifficultyLevel.Hard:
                 prizeToWin = 7;
-                FindFirstObjectByType<GameManager>().timeLimit = 80f;
+                timeLimit = 80f;
                 break;
             case DifficultyLevel.Expert:
                 prizeToWin = 10;
-                FindFirstObjectByType<GameManager>().timeLimit = 60f;
+                timeLimit = 60f;
                 break;
         }
     }

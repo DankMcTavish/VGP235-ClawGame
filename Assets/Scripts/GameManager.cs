@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Use the widely-available API to find managers in the scene
-        difficultyManager = FindObjectOfType<DifficultyManager>();
+        // 1. UI Controller is local to the scene, so FindObjectOfType is still appropriate/needed if not assigned in Inspector
         if (uiController == null)
         {
             uiController = FindObjectOfType<UIController>();
         }
+
+        // 2. Global Managers accessed via Singleton
+        // No need to cache them strictly, can access directly, but for clarity:
+        // difficultyManager = DifficultyManager.Instance; // if you want to keep reference
+
 
         // Ensure game starts in a paused/menu state if needed, or just wait for StartGame call
         Time.timeScale = 0f; // Pause game initially for Main Menu
@@ -95,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckWinCondition()
     {
-        if (difficultyManager != null && score >= difficultyManager.prizeToWin)
+        if (DifficultyManager.Instance != null && score >= DifficultyManager.Instance.prizeToWin)
         {
             WinGame();
         }
@@ -124,36 +128,17 @@ public class GameManager : MonoBehaviour
     }
 
     // Map the difficulty to the time limits requested:
-    // Easy -> 120s, Medium -> 100s, Hard -> 60s
+    // This logic could be moved to DifficultyManager entirely, but if GameManager needs to pull it:
     void ApplyTimeLimitFromDifficulty()
     {
-        if (difficultyManager == null)
+        if (DifficultyManager.Instance == null)
         {
             timeLimit = 120f; // default easy if no manager
             return;
         }
 
-        // currentDifficulty is an enum (DifficultyLevel). Call ToString() directly.
-        string diff = difficultyManager.currentDifficulty.ToString();
-        diff = diff.ToLowerInvariant();
-
-        if (diff.Contains("easy"))
-        {
-            timeLimit = 120f;
-        }
-        else if (diff.Contains("medium") || diff.Contains("normal"))
-        {
-            timeLimit = 100f;
-        }
-        else if (diff.Contains("hard"))
-        {
-            timeLimit = 60f;
-        }
-        else
-        {
-            // fallback default
-            timeLimit = 120f;
-        }
+        // Pull the time limit that DifficultyManager calculated
+        timeLimit = DifficultyManager.Instance.timeLimit;
     }
 
     // Helper to get a sensible level number for the UI if DifficultyManager doesn't provide one.

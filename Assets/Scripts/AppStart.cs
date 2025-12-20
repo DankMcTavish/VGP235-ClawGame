@@ -33,6 +33,6 @@ public class AppStart : MonoBehaviour
     private IEnumerator LoadInitialScene()
     {
         Debug.Log("GameLoader Starting Scene Load");
-        yield return SceneManager.LoadSceneAsync(_sceneIndex);
+        yield return SceneManager.LoadSceneAsync(_sceneIndex, LoadSceneMode.Additive);
     }
 }
