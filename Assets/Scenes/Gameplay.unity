@@ -948,6 +948,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2869200937034535310, guid: c50e608632281c64183496b7d599355a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4463352309294796886, guid: c50e608632281c64183496b7d599355a, type: 3}
       propertyPath: mainMenu
       value: 
