@@ -49,13 +49,13 @@ public class UIController : MonoBehaviour
         // DifficultyManager is global now
         if (difficultyManager == null) difficultyManager = DifficultyManager.Instance;
 
-        startButton.onClick.AddListener(StartGame);
-        pauseButton.onClick.AddListener(PauseGame);
-        resumeButton.onClick.AddListener(ResumeGame);
-        retryButton.onClick.AddListener(RetryGame);
-        continueButton.onClick.AddListener(ContinueToNextLevel);
-        mainMenuButton.onClick.AddListener(ReturnToMainMenu);
-        exitButton.onClick.AddListener(ExitGame);
+        if (startButton != null) startButton.onClick.AddListener(StartGame);
+        if (pauseButton != null) pauseButton.onClick.AddListener(PauseGame);
+        if (resumeButton != null) resumeButton.onClick.AddListener(ResumeGame);
+        if (retryButton != null) retryButton.onClick.AddListener(RetryGame);
+        if (continueButton != null) continueButton.onClick.AddListener(ContinueToNextLevel);
+        if (mainMenuButton != null) mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+        if (exitButton != null) exitButton.onClick.AddListener(ExitGame);
 
         // Initialize current state from defaults
         currentScore = defaultScore;
