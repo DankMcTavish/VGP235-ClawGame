@@ -9,19 +9,8 @@ public enum DifficultyLevel
 }
 
 
-public class DifficultyManager : MonoBehaviour
+public class DifficultyManager : Singleton<DifficultyManager>
 {
-    public static DifficultyManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(gameObject); 
-            return; 
-        }
-        Instance = this;
-    }
     [Header("Difficulty Settings")]
     public int prizeToWin;
     public float clawSpeedMultiplier;

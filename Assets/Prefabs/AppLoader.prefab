@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781d270cf8614c348a4b67504356a5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firebaseManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
-  _configManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
-  _difficultyManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
-  _audioManagerPrefab: {fileID: 4137338035735345602, guid: 402c0dae8be5bfa4f8a8cf8a406ef467, type: 3}
+  _firebaseManagerPrefab: {fileID: 3157068773657271790, guid: 13703c0e59ff5b843952bc4ca9f58e63, type: 3}
+  _configManagerPrefab: {fileID: 8986454442990617892, guid: 96b8efb092fea8141a7a867201f498cf, type: 3}
+  _difficultyManagerPrefab: {fileID: 6170311196408277444, guid: 7f6306457e1670445a15a8e8c4589420, type: 3}
+  _audioManagerPrefab: {fileID: 5051971875630713023, guid: 43a45f75d810ed348841d56fa1cf6af3, type: 3}
+  _collectionManagerPrefab: {fileID: 2142332765939650532, guid: e35f241f5bdabd742a9c6834cb35c8c5, type: 3}

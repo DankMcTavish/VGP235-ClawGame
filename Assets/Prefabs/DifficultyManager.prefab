@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9201266078892046837
+--- !u!1 &6170311196408277444
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7218337477704480487}
-  - component: {fileID: 9153141523428809276}
+  - component: {fileID: 8495492730058873684}
+  - component: {fileID: 2352600844860852761}
   m_Layer: 0
   m_Name: DifficultyManager
   m_TagString: Untagged
@@ -17,35 +17,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7218337477704480487
+--- !u!4 &8495492730058873684
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9201266078892046837}
+  m_GameObject: {fileID: 6170311196408277444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1357.3396, y: 493.81653, z: -7.234219}
+  m_LocalPosition: {x: -8.562371, y: 9.804013, z: 3.4601696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9153141523428809276
+--- !u!114 &2352600844860852761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9201266078892046837}
+  m_GameObject: {fileID: 6170311196408277444}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c81cd40ed2d62b4ca9cb6d501c88d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prizeToWin: 2
-  clawSpeedMultiplier: 1
-  timeLimit: 120
-  timeLimitMultiplier: 1
+  prizeToWin: 0
+  clawSpeedMultiplier: 0
+  timeLimit: 0
+  timeLimitMultiplier: 0
   currentDifficulty: 0

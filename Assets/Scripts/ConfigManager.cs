@@ -1,24 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ConfigManager : MonoBehaviour
+public class ConfigManager : Singleton<ConfigManager>
 {
-    public static ConfigManager Instance { get; private set; }
+    private Dictionary<string, long> _longValues = new Dictionary<string, long>();
 
-    private Dictionary<string, long> longValues = new Dictionary<string, long>();
-    // You can add other types (bool, string, double) as needed.
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void UpdateConfigValues()
     {

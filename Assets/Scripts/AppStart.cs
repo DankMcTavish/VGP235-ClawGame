@@ -27,12 +27,7 @@ public class AppStart : MonoBehaviour
             return;
         }
 
-        StartCoroutine(LoadInitialScene());
-    }
-
-    private IEnumerator LoadInitialScene()
-    {
-        Debug.Log("GameLoader Starting Scene Load");
-        yield return SceneManager.LoadSceneAsync(_sceneIndex, LoadSceneMode.Additive);
+        Debug.Log("AppStart requesting Scene Load via SceneController");
+        SceneController.Instance.LoadSceneAdditive(_sceneIndex);
     }
 }

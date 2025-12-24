@@ -6,24 +6,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class FirebaseManager : MonoBehaviour
+public class FirebaseManager : Singleton<FirebaseManager>
 {
-    public static FirebaseManager Instance { get; private set; }
-
     private FirebaseApp _app = null;
     private bool _isInitialized = false;
     private readonly Dictionary<string, object> _defaults = new();
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // optional: keep across scenes
+        base.Awake();
+        // Custom Awake logic if any needed besides singleton setup
     }
 
     // ... rest of your existing code ...

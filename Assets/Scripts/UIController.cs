@@ -139,7 +139,7 @@ public class UIController : MonoBehaviour
     {
         // Transition from Current Scene (Main Menu) to Gameplay (Index 2)
         // We assume this script is in the Main Menu scene.
-        AppLoader.Instance.TransitionToScene(2, gameObject.scene.buildIndex);
+        SceneController.Instance.TransitionToScene(2, gameObject.scene.buildIndex);
     }
 
     public void ToggleDifficulty()
@@ -157,7 +157,7 @@ public class UIController : MonoBehaviour
         isPaused = true;
         HideAllMenus();
         pauseMenu.SetActive(true);
-        gameManager.PauseGame();
+        if (gameManager != null) gameManager.PauseGame();
     }
 
     public void ResumeGame()
@@ -165,7 +165,7 @@ public class UIController : MonoBehaviour
         isPaused = false;
         HideAllMenus();
         Time.timeScale = 1f;
-        gameManager.ResumeGame();
+        if (gameManager != null) gameManager.ResumeGame();
     }
 
     public void ShowGameOverMenu()
@@ -184,7 +184,7 @@ public class UIController : MonoBehaviour
         UpdateScoreText(currentScore);
         UpdateLevelText(currentLevel);
 
-        gameManager.RestartGame();
+        if (gameManager != null) gameManager.RestartGame();
     }
 
     public void ShowWinningScreen()
@@ -205,7 +205,7 @@ public class UIController : MonoBehaviour
         currentLevel++;
         UpdateLevelText(currentLevel);
 
-        gameManager.RestartGame();
+        if (gameManager != null) gameManager.RestartGame();
     }
 
     public void ReturnToMainMenu()
